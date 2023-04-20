@@ -29,7 +29,6 @@ mongoose.connect('mongodb+srv://user_1:user1@cluster0.p08lmx4.mongodb.net/?retry
 /***********************************************************************
     CORS
 ***********************************************************************/
-
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
