@@ -1,23 +1,44 @@
+/***********************************************************************
+    Fichier qui contient l'application
+***********************************************************************/
+
+
+/***********************************************************************
+    APPLICATION EXPRESS
+***********************************************************************/
+//Appel de express
 const express = require('express');
-
+//Constante app permet de créer une application express
 const app = express();
+
+
+/***********************************************************************
+    BASE DE DONNEES MONGOOSE
+***********************************************************************/
+//Constante pour importer mongoose dans notre fichier
+const mongoose = require('mongoose');
+//Connexion à la base de données
+mongoose.connect('mongodb+srv://user_1:user1@cluster0.p08lmx4.mongodb.net/?retryWrites=true&w=majority',
+    {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    })
+    .then(() => console.log('Connexion à MongoDB réussie !'))
+    .catch(() => console.log('Connexion à MongoDB échouée !'));
+
+/***********************************************************************
+    CORS
+***********************************************************************/
+
 app.use((req, res, next) => {
-    console.log('Requête reçue !');
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
     next();
 });
 
-app.use((req, res, next) => {
-    res.status(201);
-    next();
-});
-
-app.use((req, res, next) => {
-    res.json({ message: 'votre requête a bien été recue!' });
-    next();
-});
-
-app.use((req, res, next) => {
-    console.log('Réponse envoyée avec succès !');
-});
+//Pour gérer la requête POST venant de l'application front-end, on a besoin d'en extraire le corps JSON. 
+//Utilisation du Middleware, mis à disposition par le framework Express. 
+app.use(express.json());
 
 module.exports = app;
