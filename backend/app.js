@@ -11,6 +11,11 @@ const express = require('express');
 //Constante app permet de créer une application express
 const app = express();
 
+/***********************************************************************
+    ROUTES
+***********************************************************************/
+//import du userRoutes
+const userRoutes = require('./routes/user');
 
 /***********************************************************************
     BASE DE DONNEES MONGOOSE
@@ -39,5 +44,13 @@ app.use((req, res, next) => {
 //Pour gérer la requête POST venant de l'application front-end, on a besoin d'en extraire le corps JSON. 
 //Utilisation du Middleware, mis à disposition par le framework Express. 
 app.use(express.json());
+
+
+/***********************************************************************
+    MIDDLEWARE
+***********************************************************************/
+//Enregistrement et ulisation de la route userRoutes
+app.use('/api/auth', userRoutes); //'/api/auth' = racine de la route lié à l'authentification attendu par l'application front 
+
 
 module.exports = app;
