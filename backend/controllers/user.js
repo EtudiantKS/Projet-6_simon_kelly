@@ -2,7 +2,7 @@
 const bcrypt = require('bcrypt');
 //Import jsonwebtoken
 const jwt = require('jsonwebtoken');
-//modèle user
+//Modèle user
 const User = require('../models/user');
 
 //Création des deux middlewares
