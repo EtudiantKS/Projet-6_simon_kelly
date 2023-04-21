@@ -1,8 +1,9 @@
 //Import de bcrypt
 const bcrypt = require('bcrypt');
-
+//Import jsonwebtoken
+const jwt = require('jsonwebtoken');
 //modèle user
-const user = require('../models/user');
+const User = require('../models/user');
 
 //Création des deux middlewares
 
@@ -38,9 +39,13 @@ exports.login = (req, res, next) => {
                     if (!valid) {
                         return res.status(401).json({ message: 'Paire login/mot de passe incorrecte' }); //erreur d'authentification le mot de passe n'est pas correct
                     }
-                    res.status(200).json({  // si le mot de passe est correct, on retourne ub code 200 avec un objet qui va contenir les infos necessaires à l'authentification des requêtes qui seront emises par l'utilisateur
+                    res.status(200).json({  // si le mot de passe est correct, on retourne un code 200 avec un objet qui va contenir les infos necessaires à l'authentification des requêtes qui seront emises par l'utilisateur
                         userId: user._id,//id
-                        token: 'TOKEN'//un token pour identifier nos requêtes
+                        token: jwt.sign( //utilisation de la fonction sign de jsonwebtoken pour chiffrer un nouveau token
+                            { userId: user._id }, //Ce token contient l'ID de l'utilisateur en tant que payload (les données encodées dans le token) afin que la création des sauces restent unique à l'utilisateur
+                            'RANDOM_TOKEN_SECRET', //clé secrete qui permet de crypter notre token
+                            { expiresIn: '24h' }//argument de config : durée de validité du token est de 24 heures. L'utilisateur devra se reconnecter au bout de 24 heures.
+                        )
                     });
                 })
                 .catch(error => res.status(500).json({ error })); // erreur de traitement => donc erreur 500
