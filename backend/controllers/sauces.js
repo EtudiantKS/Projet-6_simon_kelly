@@ -70,7 +70,7 @@ exports.modifySauce = (req, res, next) => {
         //sinon on traite simplement l'objet entrant dans le corps de la requête
     } : { ...req.body };
     //suppression de l'userId venant de la requête pour éviter que l'utiliseur crée un objet à son nom et le modifie pour le réassignier à un autre utilisateur 
-    delete sauceObject._userId; // mesure de sécurité
+    delete sauceObject._userId; // par mesure de sécurité suppression 
     //recherche et récupération de l'objet dans notre base de donnée afin de verifier si l'utilisateur est bien le créateur de l'objet
     Sauce.findOne({ _id: req.params.id })
         .then((sauce) => {
