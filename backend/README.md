@@ -1,6 +1,6 @@
 ## Projet 6 - Construire une API sécurisée pour l'application d'avis gastronomiques
 ***
-### Contexte du projet
+#### Contexte du projet
 * la responsable produit de _Piiquante_ souhaite à terme transformer l'application d'évaluation en une boutique en ligne, elle souhaite que la première version soit une « galerie de sauces » permettant aux utilisateurs de télécharger leurs sauces piquantes préférées et de liker ou disliker les sauces que d'autres partagent.
 ***Le but est de créer le backend de l'application***
 
