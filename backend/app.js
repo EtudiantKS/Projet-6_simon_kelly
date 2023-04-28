@@ -61,5 +61,5 @@ app.use(express.json());
 //Enregistrement et ulisation des routes userRoutes et saucesRoutes
 app.use('/api/auth', userRoutes); //'/api/auth' = racine de la route lié à l'authentification attendu par l'application front 
 app.use("/api/sauces", saucesRoutes);// on utilise le router qui est exposé par saucesRoutes
-app.use('/images', express.static(path.join(__dirname, 'images')));// indique à Express qu'il faut gérer la ressource images de manière statique
+app.use('/images', express.static(path.join(__dirname, 'images')));// indique à Express qu'il faut gérer la ressource image de manière statique
 module.exports = app;
