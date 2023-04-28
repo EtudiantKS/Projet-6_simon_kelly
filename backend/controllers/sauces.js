@@ -26,7 +26,7 @@ exports.createSauce = (req, res, next) => {
     const sauceObject = JSON.parse(req.body.sauce);
     // suppression de l'id généré automatiquement et envoyé par le front-end. L'id de la sauce est créé automatiquement par la base MongoDB
     delete sauceObject._id;
-    delete sauceObject._userId; //suppression également du userId de la requête envoyé par le client (ne pas faire confiance au client)
+    delete sauceObject._userId; //suppression également du userId de la requête envoyé par le client (il ne faut pas faire confiance au client)
     // Création d'une constante sauce
     const sauce = new Sauce({
         ...sauceObject,
